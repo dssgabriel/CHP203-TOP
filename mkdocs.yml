@@ -1,6 +1,13 @@
 # yaml-language-server: $schema=https://squidfunk.github.io/mkdocs-material/schema.json
 
 site_name: "CHP203: Parallel Optimization Techniques"
+site_url: https://dssgabriel.github.io/CHP203-TOP
+site_author: Hugo Taboada, Gabriel Dos Santos
+
+repo_name: dssgabriel/CHP203-TOP
+repo_url: https://github.com/dssgabriel/chp203-top
+
+copyright: Copyright &copy; 2024 - 2025, Hugo Taboada & Gabriel Dos Santos
 
 theme:
   name: material
@@ -31,7 +38,6 @@ theme:
     - navigation.tracking
     - navigation.top
     - toc.follow
-    - toc.integrate
     - search.suggest
     - search.highlight
 
@@ -51,3 +57,16 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.tabbed:
       alternate_style: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji # (1)!
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+nav:
+  - Home: index.md
+  - Repository and tools: repository_and_tools.md
+  - "Lab 1: Toolchains and HPC environment": lab1.md
+  - "Lab 2: Methodology for data visualization": lab2.md
+  - "Lab 3: Memory and data structure layouts": lab3.md
+  - "Lab 4: Distributed programming models": lab4.md
+  - "Lab 5: Shared-memory parallelism": lab5.md
+  - "Lab 6: Vectorization & ILP": lab6.md
