@@ -2,7 +2,7 @@
 
 The lab material for this course is available on the following [GitHub repository](https://github.com/dssgabriel/TOP-25).
 
-Most of the software used throught in this course can be easily installed via your Linux's distrubtion package manage (e.g. `apt` on Ubuntu/Debian, `dnf` on RedHat-based, `pacman`/`paru` on Arch, etc.) or using the [Spack Package Manager](https://spack.readthedocs.io/en/latest/index.html).
+Most of the software used throught in this course can be easily installed via your Linux distribution package manager (e.g. `apt` on Ubuntu/Debian, `dnf` on RedHat-like, `pacman`/`paru` on Arch-like, etc.), or using the [Spack Package Manager](https://spack.readthedocs.io/en/latest/index.html).
 
 
 ## Required software
@@ -27,9 +27,9 @@ MPICH | 4.2.3 | `spack install mpich@4.2.3`
 
 ## Formatting and style
 
-We expect students to format your code according to a `clang-format` spec (one is provided at the root of the lab repo).
+We expect students to format their code according to a `clang-format` spec (one is provided at the root of the lab repo). Similarly, CMake files may be formatted using tools such as `gersemi`.
 
-To improve your C/C++ code, we suggest you to regularly run tools such as `clang-tidy`, `sonar-lint` or other code linters.
+To improve your C/C++ code, we suggest you to regularly run tools such as `clang-tidy`, `sonar-lint` or other code linters that help detect anti-patterns, weird or inefficient coding styles, and suggest ways of writing more idiomatic C/C++.
 
 You can also take a look at popular and battle-tested code style guidelines such as:
 
