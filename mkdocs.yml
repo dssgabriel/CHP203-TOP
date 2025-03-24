@@ -60,6 +60,16 @@ markdown_extensions:
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji # (1)!
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.arithmatex:
+      generic: true
+
+extra_javascript:
+  - javascripts/katex.js
+  - https://unpkg.com/katex@0/dist/katex.min.js
+  - https://unpkg.com/katex@0/dist/contrib/auto-render.min.js
+
+extra_css:
+  - https://unpkg.com/katex@0/dist/katex.min.css
 
 nav:
   - Home: index.md
@@ -68,5 +78,4 @@ nav:
   - "Lab 2: Methodology for data visualization": lab2.md
   - "Lab 3: Memory and data structure layouts": lab3.md
   - "Lab 4: Distributed programming models": lab4.md
-  - "Lab 5: Shared-memory parallelism": lab5.md
-  - "Lab 6: Vectorization & ILP": lab6.md
+  - "Lab 5: Shared-memory parallelism, vectorization & ILP": lab5.md
