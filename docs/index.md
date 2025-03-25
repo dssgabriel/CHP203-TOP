@@ -2,7 +2,7 @@
 
 This site contains courses and practical work for the course **CHP203: Parallel Optimization Techniques** offered by Hugo Taboada and Gabriel Dos Santos as part of the [High Performance Computing & Simulation](https://chps.uvsq.fr/) M.Sc. program at [ISTY/UVSQ](https://www.uvsq.fr/institut-des-sciences-et-techniques-des-yvelines-isty). Its use is reserved for students of the [Paris-Saclay University](https://www.universite-paris-saclay.fr/).
 
-The Spring 2025 session will start on Tuesday, 25 March and end on Tuesday, 29 April.
+The Spring 2025 session will start on Tuesday, 25 March and end on Wednesday, 30 April.
 
 ## Course Information
 
