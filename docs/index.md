@@ -72,11 +72,11 @@ Additionally, the HPCS Master has a Discord server on which students can reach t
 
 ### Lectures
 
-Lecture slide will be made available later.
+Lecture slides will be made available later.
 
 ### Labs
 
-Lab content will be made available later on this website. 
+Lab material for this course is available on the following GitHub repository: [TOP-25](https://github.com/dssgabriel/TOP-25/tree/main)
 
 ### Resources
 
