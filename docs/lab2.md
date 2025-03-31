@@ -136,12 +136,12 @@ Examples of bad plots:
 
 <figure markdown="span">
   ![scaling4](figures/scaling4.png)
-  <figcaption>Example #8 - Strong Scaling of dot prod</figcaption>
+  <figcaption>Example #9 - Strong Scaling of dot prod</figcaption>
 </figure>
 
 <figure markdown="span">
   ![runtime4](figures/runtime4.png)
-  <figcaption>Example #9 - Baseline vs. Final Runtime</figcaption>
+  <figcaption>Example #10 - Baseline vs. Final Runtime</figcaption>
 </figure>
 
 
@@ -152,16 +152,17 @@ to measure the performance of a very basic OpenMP implementation of the [STREAM 
 
 ### Performance metrics
 
-1. Your first goal is to modify the `src/bin/main.cpp` file in order to actual measure something (e.g. execution time)
-   and extract some performance data about them. You can use standard C or C++ clocks, CPU clock cycles, or any other unit of time that you think makes sense. You can also swap out the minimal provided code and use a dedicated benchmarking library instead, e.g.:
-   - [Google Benchmarks](https://github.com/google/benchmark)
-   - [nanobench](https://github.com/martinus/nanobench)
-   - [Catch2](https://github.com/catchorg/Catch2)
-2. Then, derive some meaningful metrics (e.g., memory bandwith) from your raw measurements.
-3. Plot the obtained data, e.g. using a Python script.
+1. Modify the `src/bin/main.cpp` file in order to actual measure something (e.g. execution time) and extract some
+   performance data about them. You can use standard C or C++ clocks, CPU clock cycles, or any other
+   unit of time that you think makes sense. You can also swap out the minimal provided code and use a dedicated
+   benchmarking library instead, e.g. [Google Benchmarks](https://github.com/google/benchmark),
+   [nanobench](https://github.com/martinus/nanobench), or [Catch2](https://github.com/catchorg/Catch2).
+2. Derive some meaningful metrics (e.g., memory bandwith) from your raw measurements.
+3. Plot the obtained data (e.g., using a Python script).
 
 ### Scalability
 
-1. Your next goal is to measure the strong scaling speedup and weak scaling efficiency of the STREAM benchmarks. Write a simple script to do it.
+1. Measure the strong scaling speedup and weak scaling efficiency of the STREAM benchmarks.
+   Write a simple script to do it.
 2. Plot the obtained data.
  
