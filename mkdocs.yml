@@ -62,6 +62,10 @@ markdown_extensions:
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - pymdownx.arithmatex:
       generic: true
+  - attr_list
+  - md_in_html
+  - pymdownx.blocks.caption
+
 
 extra_javascript:
   - javascripts/katex.js
@@ -75,7 +79,7 @@ nav:
   - Home: index.md
   - Repository and tools: repository_and_tools.md
   - "Lab 1: Toolchains and HPC environment": lab1.md
-  - "Lab 2: Methodology for data visualization": lab2.md
+  - "Lab 2: Methodology for measuring and visualizing performance metrics": lab2.md
   - "Lab 3: Memory and data structure layouts": lab3.md
   - "Lab 4: Distributed programming models": lab4.md
   - "Lab 5: Shared-memory parallelism, vectorization & ILP": lab5.md
