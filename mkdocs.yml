@@ -51,6 +51,8 @@ markdown_extensions:
   - def_list
   - footnotes
   - tables
+  - attr_list
+  - md_in_html
   - pymdownx.blocks.caption
   - pymdownx.highlight:
       anchor_linenums: true
@@ -67,8 +69,6 @@ markdown_extensions:
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - pymdownx.arithmatex:
       generic: true
-  - attr_list
-  - md_in_html
   - pymdownx.blocks.caption
 
 

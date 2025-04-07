@@ -72,7 +72,7 @@ Additionally, the HPCS Master has a Discord server on which students can reach t
 
 ### Lectures
 
-Lecture slides will be made available later.
+Lecture slides are available [here](artifacts/TOP_course_2025.pdf).
 
 ### Labs
 
