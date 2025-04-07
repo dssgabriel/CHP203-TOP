@@ -54,7 +54,7 @@ tar xzf cmake-3.31.6-linux-x86_64.tar.gz
 Compiler | Version | Spack command
 --- | --- | ---
 GNU Compiler Collection (gcc) | 14.2 | `spack install gcc@14.2.0`
-LLVM Clang (clang) | 20.1.0 | `spack install llvm@19.1.7`
+LLVM Clang (clang) | 20.1.0 | `spack install llvm@20.1.0`
 Intel oneAPI (icx) | 2025.1 | `spack install intel-oneapi-compilers@2025.0.4`
 
 ### MPI
