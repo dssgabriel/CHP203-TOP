@@ -4,10 +4,50 @@ The lab material for this course is available on the following [GitHub repositor
 
 Most of the software used throught in this course can be easily installed via your Linux distribution package manager (e.g. `apt` on Ubuntu/Debian, `dnf` on RedHat-like, `pacman`/`paru` on Arch-like, etc.), or using the [Spack Package Manager](https://spack.readthedocs.io/en/latest/index.html).
 
+To load Spack-installed software, use the `spack load <PACKAGE>` command.
+
 
 ## Required software
 
-To load Spack-installed software, use the `spack load <PACKAGE>` command.
+### CMake
+
+Most of this course material relies on CMake for building the code provided in each exercise.
+
+You can get CMake from [here](https://cmake.org/download/). The prefered version for this course is
+[3.31](https://cmake.org/cmake/help/v3.31/release/3.31.html), the minimum required version is
+[3.25](https://cmake.org/cmake/help/v3.25/release/3.25.html).
+
+1. Download the binary distribution corresponding to your OS. Prefer the tarball (`.tar.gz`) instead of the shell
+script.
+
+2. Unpack the tarball where you have downloaded it:
+```sh
+tar xzf cmake-3.31.6-linux-x86_64.tar.gz
+```
+
+3. Make the CMake executable available in your `PATH`:
+
+    === "Bash"
+
+        ```bash
+        printf 'export PATH="%s/cmake-3.31.6-linux-x86_64/bin:$PATH"\n' $(pwd) >> $HOME/.bashrc
+        source $HOME/.bashrc
+        ```
+
+    === "ZSH"
+
+        ```sh
+        printf 'export PATH="%s/cmake-3.31.6-linux-x86_64/bin:$PATH"\n' $(pwd) >> $HOME/.zshrc
+        source $HOME/.zshrc
+        ```
+
+    === "Fish"
+
+        ```fish
+        printf 'set --export --prepend PATH %s/cmake-3.31.6-linux-x86_64/bin\n' $(pwd) >> $XDG_CONFIG_HOME/fish/config.fish
+        source $XDG_CONFIG_HOME/fish/config.fish
+        ```
+
 
 ### Compilers
 
