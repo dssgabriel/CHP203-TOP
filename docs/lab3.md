@@ -10,13 +10,15 @@ The code for the exercices is available at [github.com/dssgabriel/TOP-25/lab3](h
 The goal of this exercice is to improve the layout of the data structures used in the `mesh` code.
 We start by packing to reduce its memory footprint.
 
-1. Given the alignment rules imposed on structure by the ISO C standard, determine how many bytes are used by the
-`Cell` structure.
+1. Given the alignment rules imposed on structures/classes by the ISO C and C++ standards, determine how many bytes are
+used by the `Cell` structure.
 
-2. Rearrange the layout of the `Cell` structure to minimize its memory footprint. Compute how much memory is saved
-using the optimized layout.
+2. Rearrange the layout of the `Cell` structure and delete any unnecessary fields to minimize its memory footprint.
+Compute how much memory is saved using the optimized layout.
 
 3. Using Perf, check if there is a change in the number of cache misses between the two structure implementations.
+
+4. Measure the execution time difference between both implementations of the `Cell` structure.
 
 
 ## Array of Structures (AoS) vs. Structure of Arrays (SoA)
