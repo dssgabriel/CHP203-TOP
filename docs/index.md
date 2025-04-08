@@ -40,12 +40,6 @@ This course is evaluated for the 1st Year of Paris-Saclay University's M.Sc. in 
 ECTS credits
 : 3 credits (out of 30 semester credits)
 
-Modes of examination
-: - one lab report (10%)
-  - one knowledge assessment during lectures (10%)
-  - one group project (30%)
-  - one written exam (50%)
-
 
 ## Staff Information
 
