@@ -17,9 +17,9 @@ By the end of the course, the students are expected to have acquired a thorough 
 - Parallel and distributed profiling tools;
 - Data visulization methodology for performance benchmarking;
 - Memory and data structure layout optimizations;
-- Distributed programming optimizations;
 - Shared-memory parallelism optimizations;
 - CPU microarchitecture: vectorization, unrolling and ILP optimizations.
+- Distributed programming optimizations;
 
 ### Lecture sessions
 

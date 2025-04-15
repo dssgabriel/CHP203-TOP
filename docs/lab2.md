@@ -1,4 +1,4 @@
-# Methodology for measuring and visualizing performance metrics
+# Lab 2: Methodology for measuring and visualizing performance metrics
 
 An overview of performance metrics used in HPC, and how to correctly visualize them.
 
