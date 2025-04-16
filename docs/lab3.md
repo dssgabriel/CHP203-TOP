@@ -20,6 +20,8 @@ Compute how much memory is saved using the optimized layout.
 
 4. Measure the execution time difference between both implementations of the `Cell` structure.
 
+C++ Insights can also show the padding inserted by the compiler in your data structures by enabling the `Show padding information` (see an example [here](https://cppinsights.io/s/197d8cb3)).
+
 
 ## Array of Structures (AoS) vs. Structure of Arrays (SoA)
 
