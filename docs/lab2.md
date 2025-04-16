@@ -2,6 +2,11 @@
 
 An overview of performance metrics used in HPC, and how to correctly visualize them.
 
+Excellent resources from Torsten Hoefler (Gordon Bell Prize winner) on [Scientific Benchmarking of Parallel Computing Systems](https://htor.inf.ethz.ch/publications/index.php?pub=222):
+
+- [Paper](https://htor.inf.ethz.ch/publications/img/hoefler-scientific-benchmarking.pdf)
+- [Slides](https://htor.inf.ethz.ch/publications/img/hoefler-scientific-benchmarking_slides.pdf)
+- [Recorded talk](https://www.youtube.com/watch?v=HwEpXIWAWTU)
 
 ## Scalability
 
