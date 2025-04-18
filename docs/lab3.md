@@ -43,7 +43,7 @@ results.
 
 ---
 
-The rest of this lab is your assignment for next week (in groups of two). Your goal is to improve the performance of a
+The rest of this lab is your first lab assignment. Your goal is to improve the performance of a
 naive matrix product by tuning array layout and memory access patterns.
 
 For this exercise, we will rely on [Kokkos](https://kokkos.org/kokkos-core-wiki/index.html) and its [Views](https://kokkos.org/kokkos-core-wiki/ProgrammingGuide/View.html),
@@ -80,3 +80,20 @@ improvements in spatial and temporal locality.
 
 5. Make a final performance and strong scaling study of the code and plot the results. Conclude.
 
+
+### Deliverables
+
+You shall write a well-documented report explaining in detail your optimizations on storage layouts and cache blocking
+of the matrix product.   
+You are expected to present the profiling steps you have taken, the modification you have done to the code (and the
+reasons why), as well as your methodology for asserting the improvements. Your report must present plots that show the
+performance improvements for each version of the code, as well as the associated scaling studies (strong or weak, or
+both). Please include, in the report, a link to the GitHub repository with your code modifications.   
+It is strongly advised to write your report in LaTeX or [Typst](https://typst.app/).
+
+The deadline for submitting the report is set to the **2025-04-23 at 23:59 CEST** (Central European Summer Time).   
+Send it as a PDF file by email at [gabriel.dossantos@cea.fr](mailto:gabriel.dossantos@cea.fr).
+
+!!! warning
+
+    Reports submitted after the deadline or in the wrong file format will be dismissed automatically, and your grade will be 0.
