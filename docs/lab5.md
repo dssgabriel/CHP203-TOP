@@ -92,6 +92,27 @@ Fig. 1 shows the evolution of ping-pong time according to message size between i
    Is it true for all sizes?
 
 
+## Collectives and algorithms in OpenMPI
+
+Using a recent version of OpenMPI (4.0.5+), run the command `ompi_info -all`. This gives you multiple informations
+about your installation. We will use to know which algorithms are available in the `coll tuned` module of OpenMPI,
+where blocking collectives are implemented.
+
+1. Find what are the usable algorithms for the `MPI_Bcast` routine. Compare their performance depending on the number of
+   MPI processes and buffer size.
+
+2. Find what are the usable algorithms for the `MPI_Gather` routine. Compare their performance depending on the number
+   of MPI processes and buffer size.
+
+3. Find what are the usable algorithms for the `MPI_Reduce` routine. Compare their performance depending on the number
+   of MPI processes and buffer size.
+
+4. Find what are the usable algorithms for the `MPI_Alltoall` routine. Compare their performance depending on the
+   number of MPI processes and buffer size.
+
+5. For each collective, why do we need multiple algorithms?
+
+
 ## Experimental evaluation of scalability
 
 Let’s start with a very simple benchmark. Our MPI program will initially make no communication. Have node 0 measure the
@@ -125,24 +146,3 @@ implement the sum method and execute it in a loop to obtain a suitable execution
 5. Introduce a global synchronization in the repetitions loop and re-evalute the application’s scalability. What do you
    see? What remarks can you make about communications and the use of barriers in MPI applications? What should you do
    to avoid this problem?
-
-
-## Collectives and algorithms in OpenMPI
-
-Using a recent version of OpenMPI (4.0.5+), run the command `ompi_info -all`. This gives you multiple informations
-about your installation. We will use to know which algorithms are available in the `coll tuned` module of OpenMPI,
-where blocking collectives are implemented.
-
-1. Find what are the usable algorithms for the `MPI_Bcast` routine. Compare their performance depending on the number of
-   MPI processes and buffer size.
-
-2. Find what are the usable algorithms for the `MPI_Gather` routine. Compare their performance depending on the number
-   of MPI processes and buffer size.
-
-3. Find what are the usable algorithms for the `MPI_Reduce` routine. Compare their performance depending on the number
-   of MPI processes and buffer size.
-
-4. Find what are the usable algorithms for the `MPI_Alltoall` routine. Compare their performance depending on the
-   number of MPI processes and buffer size.
-
-5. For each collective, why do we need multiple algorithms?
