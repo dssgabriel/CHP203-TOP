@@ -1,0 +1,910 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Hugo Taboada, Gabriel Dos Santos">
+      
+      
+        <link rel="canonical" href="https://dssgabriel.github.io/CHP203-TOP/lab1/">
+      
+      
+        <link rel="prev" href="../repository_and_tools/">
+      
+      
+        <link rel="next" href="../lab2/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>Lab 1: Toolchains and HPC environment - CHP203: Parallel Optimization Techniques</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.2afb09e1.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://unpkg.com/katex@0/dist/katex.min.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#lab-1-toolchains-and-hpc-environment" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="CHP203: Parallel Optimization Techniques" class="md-header__button md-logo" aria-label="CHP203: Parallel Optimization Techniques" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            CHP203: Parallel Optimization Techniques
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Lab 1: Toolchains and HPC environment
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/dssgabriel/chp203-top" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    dssgabriel/CHP203-TOP
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="CHP203: Parallel Optimization Techniques" class="md-nav__button md-logo" aria-label="CHP203: Parallel Optimization Techniques" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    CHP203: Parallel Optimization Techniques
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/dssgabriel/chp203-top" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    dssgabriel/CHP203-TOP
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../repository_and_tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Repository and tools
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Lab 1: Toolchains and HPC environment
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab 1: Toolchains and HPC environment
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cmake-build-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      CMake build system
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compiler-toolchains-and-flags" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compiler toolchains and flags
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compilation-passes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compilation passes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-sanitizers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code sanitizers
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-profiling-with-linux-perf-and-hotspot" class="md-nav__link">
+    <span class="md-ellipsis">
+      Performance profiling with Linux perf and hotspot
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debuggers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Debuggers
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Debuggers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parallel-debugging" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parallel debugging
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hpc-package-managers" class="md-nav__link">
+    <span class="md-ellipsis">
+      HPC package managers
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab 2: Methodology for measuring and visualizing performance metrics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab 3: Memory and data structure layouts
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab 4: Shared-memory parallelism
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab 5: MPI optimizations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cmake-build-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      CMake build system
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compiler-toolchains-and-flags" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compiler toolchains and flags
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compilation-passes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compilation passes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-sanitizers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code sanitizers
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-profiling-with-linux-perf-and-hotspot" class="md-nav__link">
+    <span class="md-ellipsis">
+      Performance profiling with Linux perf and hotspot
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debuggers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Debuggers
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Debuggers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parallel-debugging" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parallel debugging
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hpc-package-managers" class="md-nav__link">
+    <span class="md-ellipsis">
+      HPC package managers
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="lab-1-toolchains-and-hpc-environment">Lab 1: Toolchains and HPC environment</h1>
+<p>A reminder on compilers, build systems, developement tools and profilers for HPC.</p>
+<p>The material for this lab is available on the following <a href="https://github.com/dssgabriel/TOP-25/tree/main/lab1">GitHub repo</a>.</p>
+<h2 id="cmake-build-system">CMake build system</h2>
+<ol>
+<li>
+<p>Write a minimal <code>CMakeLists.txt</code> file for the <code>vector</code> code.</p>
+</li>
+<li>
+<p>Improve your build system by splitting the <code>CMakeLists.txt</code> into multiple files in the directory hierarchy. Use CMake best practices.</p>
+</li>
+</ol>
+<p>Relevant resources for this exercise:</p>
+<ul>
+<li><a href="https://cliutils.gitlab.io/modern-cmake/README.html">Modern CMake guide</a></li>
+<li><a href="https://cmake.org/cmake/help/v3.31/command/target_sources.html">CMake's <code>target_sources</code> command</a></li>
+<li><a href="https://github.com/bemanproject/exemplar/blob/main/CMakeLists.txt">Examplar CMake</a></li>
+</ul>
+<h2 id="compiler-toolchains-and-flags">Compiler toolchains and flags</h2>
+<ol>
+<li>
+<p>Using the GCC compiler, build <code>vector</code> into an executable without any optimization flags.
+What do you notice on the display of the values of vector <code>v3</code>?</p>
+</li>
+<li>
+<p>Add the compilation flags <code>-Wall</code>, <code>-Wextra</code> and <code>-Werror</code>.<br />
+Fix all the warnings emitted by the compiler and recompile the program.</p>
+</li>
+<li>
+<p>Run the corrected program and record the time displayed.</p>
+</li>
+<li>
+<p>Compile different versions of the code using flags <code>-O1</code>, <code>-O2</code>, <code>-O3</code> and <code>-Ofast</code>. Run them each and record their execution time.<br />
+What do you see? Compare the generated assembly.</p>
+</li>
+<li>
+<p>Repeat with a different compiler (e.g. LLVM Clang, Intel ICX, etc.).<br />
+What differences do you notice?</p>
+</li>
+</ol>
+<h2 id="compilation-passes">Compilation passes</h2>
+<ol>
+<li>
+<p>Compare the flags included with <code>-O2</code> on GCC 11.x and on GCC 12.x.<br />
+Which flags differ?</p>
+</li>
+<li>
+<p>Compare the flags included with <code>-Ofast</code> on GCC and on LLVM Clang.
+Which flags differ?</p>
+</li>
+<li>
+<p>Study the program in the <code>saxpy</code> directory, then compile it with the <code>-fdump-tree-all</code> flag. Run the <code>ls</code> command.
+What do you see?</p>
+</li>
+<li>
+<p>What does it correspond to? How many do you see?</p>
+</li>
+<li>
+<p>Delete the files that have appeared, and recompile with the <code>-O1</code> flag.<br />
+What do you observe? Are any files missing from the previous compilation?</p>
+</li>
+</ol>
+<h2 id="code-sanitizers">Code sanitizers</h2>
+<p>Valgrind is an open-source programming tool for debugging, profiling and identifying memory leaks. (see <a href="https://en.wikipedia.org/wiki/Valgrind">Wikipedia page</a>)</p>
+<p>AddressSanitizer (or <code>ASan</code>) is an open-source programming tool that detects memory corruption bugs such as buffer overflows or accesses to a dangling pointer (use-after-free). AddressSanitizer is based on compiler instrumentation and directly mapped shadow memory. AddressSanitizer is currently implemented in Clang (starting from version 3.1), GCC (starting from version 4.8), Xcode (starting from version 7.x) and MSVC (widely available starting from version 16.9). (see <a href="https://en.wikipedia.org/wiki/Code_sanitizer">Wikipedia page</a>)</p>
+<ol>
+<li>
+<p>Use Valgrind on the <code>saxpy</code> code. What do you see?</p>
+</li>
+<li>
+<p>Use ASan on the <code>saxpy</code> code. What do you observe? Fix the problem(s).</p>
+</li>
+<li>
+<p>What are <code>dhat</code>, <code>memcheck</code>, <code>cachegrind</code>, <code>callgrind</code>, <code>massif</code>?</p>
+</li>
+<li>
+<p>What are <code>kcachegrind</code>, <code>massif-visualizer</code>?</p>
+</li>
+</ol>
+<h2 id="performance-profiling-with-linux-perf-and-hotspot">Performance profiling with Linux <code>perf</code> and <code>hotspot</code></h2>
+<p>Gprof is a GNU Binary Utilities program for code profiling. When compiling and linking source code with GCC, simply add the <code>-pg</code> option, the program generates a <code>gmon.out</code> file containing the profiling information.
+You can then use Gprof to read this file, specifying the options.</p>
+<p>Perf (sometimes called <code>perf_events</code> or <code>perf-tools</code>, originally Performance Counters for Linux, PCL) is a performance analysis tool for Linux, available in the Linux kernel since version 2.6.31 in 2009. The userspace controlling utility, named <code>perf</code>, is accessed from the command line and provides a number of subcommands; it is capable of statistical profiling of the entire system (both kernel and userspace code).</p>
+<p>Hotspot is a GUI for the Linux Perf profiler that replaces the <code>perf report</code> command. (see <a href="https://github.com/KDAB/hotspot">GitHub page</a>)</p>
+<p>The <code>mol-dyn</code> code supplied is a model of a molecular dynamics simulation in a gas (interaction between gas molecules).<br />
+To compile, there are three preset sizes to choose from:</p>
+<table>
+<thead>
+<tr>
+<th>Preset</th>
+<th>CMake command</th>
+<th>Number of particles</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mini</td>
+<td><code>-DNPART=MINI</code></td>
+<td>1372</td>
+</tr>
+<tr>
+<td>medium</td>
+<td><code>-DNPART=MEDIUM</code></td>
+<td>4000</td>
+</tr>
+<tr>
+<td>maxi</td>
+<td><code>-DNPART=MAXI</code></td>
+<td>13500</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>
+<p>Use Gprof on the <code>mol-dyn</code> code. What is the most computationally-intensive function?</p>
+</li>
+<li>
+<p>Use Perf or Hotspot on the code. What is the most computationally-intensive function?</p>
+</li>
+<li>
+<p>What is a <em>hotspot</em> in the context of performance profiling?</p>
+</li>
+</ol>
+<h2 id="debuggers">Debuggers</h2>
+<p>Study the program in <code>bugs</code>, then compile it with the <code>-g3</code> flag. Run the program using the GNU Debugger (GDB):
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>gdb<span class="w"> </span>&lt;BIN_NAME&gt;
+</code></pre></div></td></tr></table></div></p>
+<p>GDB features interactive help. Start by browsing the help menu, typing <code>help</code> to get a list of commands. Then, <code>help</code> followed by a command to obtain information about it.</p>
+<ol>
+<li>
+<p>To locate the source of the first bug, type <code>run</code> (or <code>r</code>) under GDB. Quit (<code>quit</code>), correct the error and recompile the program.</p>
+</li>
+<li>
+<p>Proceed in the same way to correct the next bug. Use the <code>backtrace</code> (or <code>bt</code>) command to display the call stack and obtain more information on the source of the error.</p>
+</li>
+<li>
+<p>Identify the next error after recompiling the program. What is the problem? Can it be corrected?</p>
+</li>
+<li>
+<p>We're now going to solve the last bug with other basic GDB functions. Start the debugger without using the <code>run</code> command for the moment. Set a breakpoint on the <code>launch_fibonacci()</code> function using <code>breakpoint launch_fibonacci</code> (or <code>b launch_fibonacci</code>).<br />
+Now try to print the value of <code>fibo_values-&gt;max</code>.<br />
+What do you see? Use <code>up</code> to position yourself before the function call, then <code>list</code> to display the lines of code around the breakpoint. Now enter the command <code>print fibo_values</code>. Correct the problem and recompile the program.</p>
+</li>
+</ol>
+<p>The sequence is incorrect. We should obtain the following numbers:
+$$
+F_0 = 0, F_1 = 1, F_2 = 1, F_3 = 2, F_4 = 5, F_6 = 8, \ldots
+$$
+To pinpoint the source of the error, we will display the values in the sequence step by step, monitoring changes to the <code>fibo_values-&gt;result</code> variable.</p>
+<h3 id="parallel-debugging">Parallel debugging</h3>
+<p>There are debuggers specifically designed for the needs of parallel programs. Examples include TotalView and Linaro DDT. Although these programs are very powerful, they are not free nor open-source.
+Nevertheless, it is possible to use GDB to debug small-scale parallel programs.
+For multi-threaded programs, simply use the <code>info threads</code> command in GDB. We can choose to view a particular thread with the command <code>thread &lt;thread_number&gt;</code>.</p>
+<p>For MPI programs, we can use the following trick:
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a>mpirun<span class="w"> </span>-np<span class="w"> </span>&lt;NPROC&gt;<span class="w"> </span>&lt;TERM_EMULATOR&gt;<span class="w"> </span>-e<span class="w"> </span>gdb<span class="w"> </span>-args<span class="w"> </span>&lt;MY_BIN&gt;<span class="w"> </span><span class="o">[</span>ARGS...<span class="o">]</span>
+</code></pre></div></td></tr></table></div>
+This will open one terminal per MPI process.</p>
+<ol>
+<li>
+<p>Start from the original <code>mol-dyn</code> code and parallelize the program's most expensive function using OpenMP or Pthread.</p>
+</li>
+<li>
+<p>If necessary, use the above methods to debug your parallel code on <code>mol-dyn</code>.</p>
+</li>
+</ol>
+<h2 id="hpc-package-managers">HPC package managers</h2>
+<ul>
+<li><a href="https://spack.readthedocs.io/en/latest/index.html">Spack PM</a></li>
+<li><a href="https://guix.gnu.org/">GNU GUIX</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024 - 2025, Hugo Taboada & Gabriel Dos Santos
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.tracking", "navigation.top", "toc.follow", "search.suggest", "search.highlight", "content.tabs.link"], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+        <script src="../javascripts/katex.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/katex.min.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/contrib/auto-render.min.js"></script>
+      
+    
+  </body>
+</html>
