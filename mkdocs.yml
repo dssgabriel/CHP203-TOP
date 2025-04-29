@@ -86,5 +86,5 @@ nav:
   - "Lab 1: Toolchains and HPC environment": lab1.md
   - "Lab 2: Methodology for measuring and visualizing performance metrics": lab2.md
   - "Lab 3: Memory and data structure layouts": lab3.md
-  - "Lab 4: Shared-memory parallelism, vectorization & ILP": lab4.md
-  - "Lab 5: Distributed programming models": lab5.md
+  - "Lab 4: Shared-memory parallelism": lab4.md
+  - "Lab 5: MPI optimizations": lab5.md

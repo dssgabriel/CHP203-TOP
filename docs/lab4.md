@@ -1,4 +1,4 @@
-# Lab 4: Shared-memory parallelism, vectorization & ILP
+# Lab 4: Shared-memory parallelism
 
 An overview of common problems and optimization techniques for shared-memory parallelism.
 
