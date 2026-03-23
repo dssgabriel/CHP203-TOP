@@ -1,74 +1,150 @@
-# Lab 4: Shared-memory parallelism
+# Lab 4: Distributed-memory programming
 
-An overview of common problems and optimization techniques for shared-memory parallelism.
+## Generalities
 
-## False sharing
+1. Give the definition of network latency.
 
-In this exercise, you'll investigate the performance impact of false sharing in a [multi-threaded C++ code snippet](https://github.com/dssgabriel/TOP-25/lab4/false-sharing) and implement solutions to mitigate this problem.
+2. Give the definition of network bandwidth.
 
-### Analyzing the problem
+3. Give their respective units.
 
-1. Explain what is _false sharing_ and why it might be occuring in this code.
+4. Give the name and version of the MPI library you are using. Give the command used to retrieve this information.
 
-2. On a typical x86-64 architecture, what is the typical cache line size? How does this relate to the `counters` array layout?
-
-3. Compile and run the provided code with optimization flags.
-
-4. Try running with a different numbers of threads. How does performance scale? Does it scale linearly with the number of threads as you can expect?
-
-5. Use a profiling tool to measure cache-related metrics. What patterns do you observe?
-
-### Fixing the issue
-
-6. Implement at least two different solutions to eliminate false sharing.
-
-7. For each solution, measure and report the performance improvements.
-
-8. Look into [`std::hardware_destructive_interference_size`](https://en.cppreference.com/w/cpp/thread/hardware_destructive_interference_size) as a third solution. Measure and report its gains.
+5. To make sure your installation works, you can use the hostname command, which returns the name of the current
+   process’s host:
+   ```sh
+   mpirun -np 2 hostname
+   ```
+   What happens when all processes are executed on the same host?
 
 
-## Parallel scan
+## Ping pong
 
-In this exercise, you'll explore different approaches to implementing parallel prefix sums (scans) and analyze their performance and scalability characteristics.
+### Set up
 
-While reduction operations combine all elements of a sequence into a single value, scan operations compute all the partial reductions. For example, given an array `[1, 2, 3, 4, 5]`, an _inclusive_ scan produces `[1, 3, 6, 10, 15]` where each element is the sum of all previous elements including itself. An _exclusive_ scan produces `[0, 1, 3, 6, 10]` where each element is the sum of all previous elements excluding itself.
+In this exercise, you will do performance measurements using the ping-pong benchmark to familiarize with MPI’s
+characteristics communication times.
+Start by writing a ping-pong between two MPI processes. Rank 0 will send a message, and rank 1 will receive it. Write
+your code so that you can set the message size as a command-line argument.
 
-Scans are fundamental parallel primitives with applications in numerous algorithms including sorting, lexical analysis, and string comparison.
+1. The code hereafter is a simple ping from rank 0 to rank 1 (no answer). We have voluntarily added a `sleep(2)` in
+   the rank 1′s code.
+   ```c
+   if (rank == 0) {
+     t0 = MPI_Wtime();
+     MPI_Send(buffer, size, MPI_CHAR, 1, 0, MPI_COMM_WORLD);
+     t1 = MPI_Wtime();
+     printf("%lu\t%g\n", size, t1 - t0);
+   } else if (rank == 1) {
+     sleep(2);
+     MPI_Recv(buffer, size, MPI_CHAR, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+   }
+   ```
+   Using OpenMPI 2.0.1, we measured the execution time as a function of message size. We obtain 53.1654 ms for a size
+   of 4,000 Bytes, and 2.0006 s for a size of 4,096 Bytes.
+   How do you explain this difference? What did we actually measure?
 
-Consider the sample code given in [`integer-scan`](https://github.com/dssgabriel/TOP-25/lab4/integer-scan).
+2. Find the message size for which this gap appears in your MPI implementation. This size might be different than the
+   one we observed using OpenMPI 2.0.1 (4,096 B). Explain the reason why.
 
-### Sequential implementation
+3. We decide to remove the call to sleep() . Does the measure make sense now? Why?
 
-1. Implement the inclusive scan operation sequentially and measure its performance in cycles/element using the `getticks()` function provided in the `"cycle.h"` header.
+4. Propose an alternative to measure the actual sending time of a message (i.e. the time it took to actually receive it
+   on the target rank). Write the corresponding program.
+    It is strongly advised that you read the MPI documentation of the different modes of communications: Standard,
+    Buffered, Ready, Synchronous, etc.
 
-2. Unlike the reduction operation, what is the theoretical computational complexity of a scan? How does this affect parallel implementation strategies?
+5. Write an actual MPI ping-pong (rank 1 answers back to rank 0). Explain why the measured times corresponds to a
+   message exchange.
 
-3. Compile and run your sequential implementation with both -O0 and -O3 optimization flags. Compare the performance results.
+### First measures
 
-### Parallelization
+1. Do multiple measures with multiples of 32 Bytes for the message sizes. What do you see?
 
-4. Parallelize the inclusive scan using OpenMP with just `#pragma omp parallel for`. Verify your results against the sequential version.
+2. We propose adding a barrier before the message exchange phase. Explain what is the interest of this barrier with
+   regards to the accuracy of the measurements.
 
-5. Why does this approach fail to produce correct results? Explain the data dependency pattern in scan operations that makes them more challenging to parallelize than reductions.
+3. Rerun the measures of question 11. Are the changes from the previous question suﬃcient? Why?
 
-### Work-efficient approach
+### Repetitions
 
-6. Implement the work-efficient parallel scan algorithm, which consists of an up-sweep (reduction) phase and a down-sweep phase.
+When taking a measurement, it is important to remember that our environment does not allow us to reproduce the exact
+conditions between each run. Moreover, time measurement itself is fraught with uncertainty. To solve this problem, we
+prefer to repeat measurements and calculate an average (mean, think about which one is the best) and a median.
+Alternatively, we can repeat runs until, e.g., the 95% confidence interval is within 5% of our reported means.
 
-7. Use OpenMP tasks or sections to parallelize each phase. Note that synchronization between phases is critical.
+1. Update the program to add repetitions. You should now print the average execution time.
 
-8. How does the performance compare to the sequential version? What is the theoretical speedup limit for this algorithm?
+### Impact of message size
 
-### Going deeper...
+<figure markdown="span">
+  ![msglat](figures/mpi_message_lat.png)
+  <figcaption>Fig. 1 - Communication time as a function of message size</figcaption>
+</figure>
 
-9. In the naive parallelization attempt, one could try to fix the data race using atomic operations. Update your implementation to use `#pragma omp atomic`. Is this approach viable for scan operations? Compare its performance with the other implementations. Why are atomic operations generally less effective for scan operations than for reductions?
+Fig. 1 shows the evolution of ping-pong time according to message size between intra-node (local) and inter-node
+(Ethernet and Infiniband) exchanges. Scales are logarithmic.
 
-10. Implement a hybrid approach that combines the work-efficient and blocked methods for larger arrays. What are the trade-offs in choosing block sizes? How does this affect performance across different architectures?
+1. Explain why there is such a big gap between local and Inﬁniband for small sizes.
+   Explain this gap shrinks progressively once the message size increases.
 
-11. Implement a blocked parallel scan where:
-  1. The array is divided into blocks;
-  2. Each block computes its local scan in parallel;
-  3. The last elements of each block are scanned;
-  4. The results are propagated back to update each block.
+2. From the previous results, should we send distinct sets of data separately? Or should we try to group them together
+   Is it true for all sizes?
 
-12. What are the limitations of your implementations if you plan to deploy them on many-core architectures like GPUs? How would you need to adapt your algorithms for GPU implementation using frameworks like CUDA or OpenCL? Propose (but do not implement) a GPU-friendly parallel scan algorithm that addresses these limitations.
+
+## Collectives and algorithms in Open MPI
+
+Using a recent version of Open MPI (5.x+), run the command `ompi_info -all`.
+This gives you multiple informations about your installation.
+We will use to know which algorithms are available in the `coll tuned` module of OpenMPI, where blocking collectives are implemented.
+
+1. Find what are the usable algorithms for the `MPI_Bcast` routine.
+   Compare their performance depending on the number of MPI processes and buffer size.
+
+2. Find what are the usable algorithms for the `MPI_Gather` routine.
+   Compare their performance depending on the number of MPI processes and buffer size.
+
+3. Find what are the usable algorithms for the `MPI_Reduce` routine.
+   Compare their performance depending on the number of MPI processes and buffer size.
+
+4. Find what are the usable algorithms for the `MPI_Alltoall` routine.
+   Compare their performance depending on the number of MPI processes and buffer size.
+
+5. For each collective, why do we need multiple algorithms?
+
+
+## Experimental evaluation of scalability
+
+Let’s start with a very simple benchmark.
+Our MPI program will initially make no communication.
+Have node 0 measure the program’s execution time.
+It will perform a simple sum of two vectors, in the following form:
+$$
+X_i^{t+1} = X_i^t + c
+$$
+with $X$ a vector of size $N$ and $c$ a real constant.
+
+Clearly, such an equation can be distributed over several MPI processes without any communication, so we will simply
+implement the sum method and execute it in a loop to obtain a suitable execution time for our measurement.
+
+1. Implement this benchmark like so:
+  - Initialize the MPI context
+  - Pass the vector size and the number of repetitions as parameters of the program
+  - Allocate and initialize memory for two vectors. Each node shall compute the sum on a vector of size $\frac{N}{nb_{tasks}$
+  - Make sure to measure the execution time as seen previously in this lab
+
+2. What does strong scalability represent?
+
+3. What does weak scalability represent?
+
+4. To introduce communications in our program, we want to consider a case inspired by finite elements method (FEM).
+   Our equation is now:
+   $$
+   X_i^{t+1} = \frac{X_{i-1}^𝑡 + 2 X_i^t + X_{i+1}^t}{4}
+   $$
+   Here, MPI slicing requires the addition of communications for border elements. Modify the application in this way
+   and evaluate scalability.
+
+5. Introduce a global synchronization in the repetitions loop and re-evalute the application’s scalability. What do you
+   see? What remarks can you make about communications and the use of barriers in MPI applications? What should you do
+   to avoid this problem?
