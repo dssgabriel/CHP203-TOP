@@ -4,7 +4,7 @@ An overview of common problems and optimization techniques for shared-memory par
 
 ## False sharing
 
-In this exercise, you'll investigate the performance impact of false sharing in a [multi-threaded C++ code snippet](https://github.com/dssgabriel/TOP-25/lab4/false-sharing) and implement solutions to mitigate this problem.
+In this exercise, you'll investigate the performance impact of false sharing in a [multi-threaded C++ code snippet](https://github.com/dssgabriel/TOP-26/lab4/false-sharing) and implement solutions to mitigate this problem.
 
 ### Analyzing the problem
 

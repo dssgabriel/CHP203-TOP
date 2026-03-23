@@ -2,7 +2,7 @@
 
 A reminder on compilers, build systems, developement tools and profilers for HPC.
 
-The material for this lab is available on the following [GitHub repo](https://github.com/dssgabriel/TOP-25/tree/main/lab1).
+The material for this lab is available on the following [GitHub repo](https://github.com/dssgabriel/TOP-26/tree/main/lab1).
 
 
 ## CMake build system

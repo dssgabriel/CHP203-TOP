@@ -2,7 +2,7 @@
 
 Software engineering techniques to improve spatial and temporal data locality in the pursuit of performance.
 
-The code for the exercices is available at [github.com/dssgabriel/TOP-25/lab3](https://github.com/dssgabriel/TOP-25/tree/main/lab3).
+The code for the exercices is available at [github.com/dssgabriel/TOP-26/lab3](https://github.com/dssgabriel/TOP-26/tree/main/lab3).
 
 
 ## Data structure packing
