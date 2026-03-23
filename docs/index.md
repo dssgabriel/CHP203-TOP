@@ -4,6 +4,7 @@ This site contains courses and practical work for the course **CHP203: Parallel 
 
 The Spring 2026 session will start on Tuesday, 24 March and end on Tuesday, 28 April.
 
+
 ## Course Information
 
 ### Description & objectives
@@ -12,7 +13,7 @@ This course provides an overview of common optimization techniques for modern HP
 
 By the end of the course, the students are expected to have acquired a thorough understanding of the following concepts:
 
-- Compilers, build system toolchains and HPC environments
+- Compilers, build systems, and HPC toolchains
 - Parallel and distributed programming models
 - Parallel and distributed profiling tools
 - Performance benchmarking methodology
@@ -40,6 +41,14 @@ This course is evaluated for the 1st Year of Paris-Saclay University's M.Sc. in 
 **ECTS credits**
 : 3 credits (out of 30 semester credits)
 
+**Grades**
+
+| Examination | Grading | Breakdown |
+| --- | --- | --- |
+| Quizz | Mid-semester surprise test | 15% |
+| Project | Report + defence | 35% |
+| Exam | End of semester finals | 50% |
+
 
 ## Staff Information
 
@@ -61,6 +70,7 @@ Be mindful when sending e-mails. If it is your first contact with the instructor
 Additionally, the HPCS Master has a Discord server on which students can reach the TA (handle: `@gabrl`), either by Private Message or through the `#techniques-optimisation-paralleles` channel.
 
 :arrow_right: [**Invite link**](https://discord.gg/8rJ7hvJE)
+
 
 ## Material
 
