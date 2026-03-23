@@ -11,26 +11,20 @@ copyright: Copyright &copy; 2024 - 2026, Hugo Taboada & Gabriel Dos Santos
 
 theme:
   name: material
+  language: en
   palette:
-  - primary: deep orange
-  - accent: red
-    # Palette toggle for automatic mode
-  - media: "(prefers-color-scheme)"
+  - scheme: default
+    primary: deep orange
+    accent: red
     toggle:
-      icon: material/brightness-auto
-      name: Switch to light mode
-  # Palette toggle for light mode
-  - media: "(prefers-color-scheme: light)"
-    scheme: default
-    toggle:
-      icon: material/brightness-7
+      icon: lucide/sun
       name: Switch to dark mode
-  # Palette toggle for dark mode
-  - media: "(prefers-color-scheme: dark)"
-    scheme: slate
+  - scheme: slate
+    primary: deep orange
+    accent: red
     toggle:
-      icon: material/brightness-4
-      name: Switch to system preference
+      icon: lucide/moon
+      name: Switch to light mode
   font:
     text: Inter
     code: Geist Mono
@@ -85,8 +79,9 @@ extra_css:
 nav:
   - Home: index.md
   - Repository and tools: repository_and_tools.md
-  - "Lab 1: Toolchains and HPC environment": lab1.md
-  - "Lab 2: Methodology for measuring and visualizing performance metrics": lab2.md
-  - "Lab 3: Memory and data structure layouts": lab3.md
-  - "Lab 4: Shared-memory parallelism": lab4.md
-  - "Lab 5: MPI optimizations": lab5.md
+  - "Lab 1: HPC toolchains & Performance profiling": lab1.md
+  - "Lab 2: Memory and data structure layouts": lab2.md
+  - "Lab 3: Shared-memory parallelism": lab3.md
+  - "Lab 4: Distributed-memory programming": lab4.md
+  - "Lab 5: Distributed-memory programming (advanced)": lab5.md
+  - "Appendix": appendix.md
