@@ -7,31 +7,33 @@ site_author: Hugo Taboada, Gabriel Dos Santos
 repo_name: dssgabriel/CHP203-TOP
 repo_url: https://github.com/dssgabriel/chp203-top
 
-copyright: Copyright &copy; 2024 - 2025, Hugo Taboada & Gabriel Dos Santos
+copyright: Copyright &copy; 2024 - 2026, Hugo Taboada & Gabriel Dos Santos
 
 theme:
   name: material
   palette:
+  - primary: deep orange
+  - accent: red
     # Palette toggle for automatic mode
-    - media: "(prefers-color-scheme)"
-      toggle:
-        icon: material/brightness-auto
-        name: Switch to light mode
-    # Palette toggle for light mode
-    - media: "(prefers-color-scheme: light)"
-      scheme: default 
-      toggle:
-        icon: material/brightness-7
-        name: Switch to dark mode
-    # Palette toggle for dark mode
-    - media: "(prefers-color-scheme: dark)"
-      scheme: slate
-      toggle:
-        icon: material/brightness-4
-        name: Switch to system preference
+  - media: "(prefers-color-scheme)"
+    toggle:
+      icon: material/brightness-auto
+      name: Switch to light mode
+  # Palette toggle for light mode
+  - media: "(prefers-color-scheme: light)"
+    scheme: default
+    toggle:
+      icon: material/brightness-7
+      name: Switch to dark mode
+  # Palette toggle for dark mode
+  - media: "(prefers-color-scheme: dark)"
+    scheme: slate
+    toggle:
+      icon: material/brightness-4
+      name: Switch to system preference
   font:
     text: Inter
-    code: JetBrains Mono
+    code: Geist Mono
   features:
     - navigation.instant
     - navigation.instant.progress
