@@ -1,4 +1,4 @@
-# Lab 1: Toolchains and HPC environment
+# Lab 1: HPC Toolchains & Performance profiling
 
 A reminder on compilers, build systems, developement tools and profilers for HPC.
 
@@ -67,32 +67,9 @@ AddressSanitizer (or `ASan`) is an open-source programming tool that detects mem
 4. What are `kcachegrind`, `massif-visualizer`?
 
 
-## Performance profiling with Linux `perf` and `hotspot`
-
-Gprof is a GNU Binary Utilities program for code profiling. When compiling and linking source code with GCC, simply add the `-pg` option, the program generates a `gmon.out` file containing the profiling information.
-You can then use Gprof to read this file, specifying the options.
-
-Perf (sometimes called `perf_events` or `perf-tools`, originally Performance Counters for Linux, PCL) is a performance analysis tool for Linux, available in the Linux kernel since version 2.6.31 in 2009. The userspace controlling utility, named `perf`, is accessed from the command line and provides a number of subcommands; it is capable of statistical profiling of the entire system (both kernel and userspace code).
-
-Hotspot is a GUI for the Linux Perf profiler that replaces the `perf report` command. (see [GitHub page](https://github.com/KDAB/hotspot))
-
-The `mol-dyn` code supplied is a model of a molecular dynamics simulation in a gas (interaction between gas molecules).  
-To compile, there are three preset sizes to choose from:
-
-Preset | CMake command | Number of particles
---- | --- | --- 
-mini | `-DNPART=MINI` | 1372
-medium | `-DNPART=MEDIUM` | 4000
-maxi | `-DNPART=MAXI` | 13500
-
-1. Use Gprof on the `mol-dyn` code. What is the most computationally-intensive function?
-
-2. Use Perf or Hotspot on the code. What is the most computationally-intensive function?
-
-3. What is a _hotspot_ in the context of performance profiling?
-
-
 ## Debuggers
+
+### Sequential debugging
 
 Study the program in `bugs`, then compile it with the `-g3` flag. Run the program using the GNU Debugger (GDB):
 ```sh
@@ -133,6 +110,59 @@ This will open one terminal per MPI process.
 1. Start from the original `mol-dyn` code and parallelize the program's most expensive function using OpenMP or Pthread.
 
 2. If necessary, use the above methods to debug your parallel code on `mol-dyn`.
+
+
+## Performance profiling with GNU `gprof`, Linux `perf` and `hotspot`
+
+Gprof is a GNU Binary Utilities program for code profiling.
+When compiling and linking source code with GCC, simply add the `-pg` option, the program generates a `gmon.out` file containing the profiling information.
+You can then use Gprof to read this file, specifying the options.
+
+Perf (sometimes called `perf_events` or `perf-tools`, originally Performance Counters for Linux, PCL) is a performance analysis tool for Linux, available in the Linux kernel since version 2.6.31 in 2009.
+The userspace controlling utility, named `perf`, is accessed from the command line and provides a number of subcommands; it is capable of statistical profiling of the entire system (both kernel and userspace code).
+
+Hotspot is a GUI for the Linux Perf profiler that replaces the `perf report` command (see [its GitHub page](https://github.com/KDAB/hotspot)).
+
+The `mol-dyn` code supplied is a model of a molecular dynamics simulation in a gas (interaction between gas molecules).  
+To compile, there are three preset sizes to choose from:
+
+| Preset | CMake command | Number of particles |
+| --- | --- | --- |
+| mini | `-DNPART=MINI` | 1372 |
+| medium | `-DNPART=MEDIUM` | 4000 |
+| maxi | `-DNPART=MAXI` | 13500 |
+
+1. Use Gprof on the `mol-dyn` code.
+   What is the most computationally-intensive function?
+
+2. Use Perf and Hotspot on the code.
+   What is the most computationally-intensive function?
+
+3. What is a _hotspot_ in the context of performance profiling?
+
+
+## STREAM benchmarks
+
+Given the code provided in the [lab 1 repository](https://github.com/dssgabriel/TOP-26/tree/main/lab1/stream), you are
+to measure the performance of a very basic OpenMP implementation of the [STREAM bandwidth benchmarks](https://cs.virginia.edu/stream/ref.html).
+
+### Performance metrics
+
+1. Modify the `src/bin/main.cpp` file in order to actual measure something (e.g. execution time) and extract some
+   performance data about them.
+   You can use standard C or C++ clocks, CPU clock cycles, or any other unit of time that you think makes sense.
+   You can also swap out the minimal provided code and use a dedicated benchmarking library instead, e.g. [Google Benchmarks](https://github.com/google/benchmark), [nanobench](https://github.com/martinus/nanobench), or [Catch2](https://github.com/catchorg/Catch2).
+
+2. Derive some meaningful metrics (e.g., memory bandwith) from your raw measurements.
+
+3. Plot the obtained data (e.g., using a Python script).
+
+### Scalability
+
+1. Measure the strong scaling speedup and weak scaling efficiency of the STREAM benchmarks.
+   Write a simple script to do it.
+
+2. Plot the obtained data.
 
 
 ## HPC package managers
