@@ -38,19 +38,21 @@ What differences do you notice?
 
 ## Compilation passes
 
-1. Compare the flags included with `-O2` on GCC 11.x and on GCC 12.x.  
-Which flags differ?
+1. Compare the flags included with `-O2` on [GCC 11.x](https://gcc.gnu.org/onlinedocs/gcc-11.5.0/gcc/Optimize-Options.html) and on [GCC 12.x](https://gcc.gnu.org/onlinedocs/gcc-12.5.0/gcc/Optimize-Options.html).
+   Which flags differ?
 
 2. Compare the flags included with `-Ofast` on GCC and on LLVM Clang.
-Which flags differ?
+   Which flags differ?
 
-3. Study the program in the `saxpy` directory, then compile it with the `-fdump-tree-all` flag. Run the `ls` command.
-What do you see?
+3. Study the program in the `saxpy` directory, then compile it with the `-fdump-tree-all` flag.
+   Run the `ls` command.
+   What do you see?
 
-4. What does it correspond to? How many do you see?
+4. What does it correspond to?
+   How many do you see?
 
 5. Delete the files that have appeared, and recompile with the `-O1` flag.  
-What do you observe? Are any files missing from the previous compilation?
+   What do you observe? Are any files missing from the previous compilation?
 
 
 ## Code sanitizers
