@@ -41,7 +41,7 @@ What differences do you notice?
 1. Compare the flags included with `-O2` on [GCC 11.x](https://gcc.gnu.org/onlinedocs/gcc-11.5.0/gcc/Optimize-Options.html) and on [GCC 12.x](https://gcc.gnu.org/onlinedocs/gcc-12.5.0/gcc/Optimize-Options.html).
    Which flags differ?
 
-2. Compare the flags included with `-Ofast` on GCC and on LLVM Clang.
+2. Compare the flags included with `-Ofast` on [GCC](https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Optimize-Options.html) and on [LLVM Clang](https://manpages.debian.org/experimental/clang-22/clang-22.1.en.html).
    Which flags differ?
 
 3. Study the program in the `saxpy` directory, then compile it with the `-fdump-tree-all` flag.
