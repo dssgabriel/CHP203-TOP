@@ -1,6 +1,6 @@
 # Introduction
 
-This site contains courses and practical work for the course **CHP203: Parallel Optimization Techniques** offered by Hugo Taboada and Gabriel Dos Santos as part of the [High Performance Computing & Simulation](https://chps.uvsq.fr/) M.Sc. program at [ISTY/UVSQ](https://www.uvsq.fr/institut-des-sciences-et-techniques-des-yvelines-isty). Its use is reserved for students of the [Paris-Saclay University](https://www.universite-paris-saclay.fr/).
+This site contains lectures and practical work for the course **CHP203: Parallel Optimization Techniques** offered by Hugo Taboada and Gabriel Dos Santos as part of the [High Performance Computing & Simulation](https://chps.uvsq.fr/) M.Sc. program at [ISTY/UVSQ](https://www.uvsq.fr/institut-des-sciences-et-techniques-des-yvelines-isty). Its use is reserved for students of the [Paris-Saclay University](https://www.universite-paris-saclay.fr/).
 
 The Spring 2026 session will start on Tuesday, 24 March and end on Tuesday, 28 April.
 
@@ -45,9 +45,10 @@ This course is evaluated for the 1st Year of Paris-Saclay University's M.Sc. in 
 
 | Examination | Grading | Breakdown |
 | --- | --- | --- |
-| Quizz | Mid-semester surprise test | 15% |
-| Project | Report + defence | 35% |
-| Exam | End of semester finals | 50% |
+| Quizz | Mid-semester (surprise) test | 15% |
+| Project | Report & presentation | 35% |
+| Exam | End-semester finals | 50% |
+| **Total** | | **100%** |
 
 
 ## Staff Information
