@@ -16,6 +16,7 @@ Relevant resources for this exercise:
 - [Modern CMake guide](https://cliutils.gitlab.io/modern-cmake/README.html)
 - [CMake's `target_sources` command](https://cmake.org/cmake/help/v3.31/command/target_sources.html)
 - [Examplar CMake](https://github.com/bemanproject/exemplar/blob/main/CMakeLists.txt)
+- [NYU's VIP CMake lab](https://nyu-processor-design.github.io/getting_started/onboarding/02_cmake.html)
 
 
 ## Compiler toolchains and flags
