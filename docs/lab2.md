@@ -40,7 +40,7 @@ results.
 5. Measure the strong scaling of the new code.
 
 
-### Dense matrix product optimization
+## Dense matrix product optimization
 
 Your goal is to improve the performance of a naive dense matrix product by tuning array layout and memory access patterns.
 
@@ -50,7 +50,7 @@ We will also leverage Kokkos' parallel constructs to express portable parallelis
 If you have a GPU (NVIDIA w/ CUDA, AMD w/ HIP, or Intel Arc w/ SYCL), you can also change the Memory/Execution spaces of the code to trivially make it run on your accelerator (see how [here](https://kokkos.org/kokkos-core-wiki/ProgrammingGuide/ProgrammingModel.html)).
 
 
-## Array layouts
+### Array layouts
 
 1. Measure the performance of the naive matrix product and plot the results.
    You can simply measure its runtime, or derived metrics such as computational performance (in FLOP/s).   
@@ -64,7 +64,7 @@ If you have a GPU (NVIDIA w/ CUDA, AMD w/ HIP, or Intel Arc w/ SYCL), you can al
 3. Repeat the steps of question 1.
 
 
-## Cache blocking
+### Cache blocking
 
 1. Profile the `matrix-product` code using Perf/Hotspot.
    Specifically, look at cache misses in the L1 and L3 (LLC) caches.
@@ -79,3 +79,36 @@ If you have a GPU (NVIDIA w/ CUDA, AMD w/ HIP, or Intel Arc w/ SYCL), you can al
 
 5. Make a final performance and strong scaling study of the code and plot the results.
    Conclude.
+
+## Branch prediction
+
+The code in `branch-predict` is not an exercise but a small example showcasing how data ordering can affect performance.
+
+**What the code does**
+
+The program allocates two copies of a 5M-element `double` array, both initialized identically with `drand48()` — drawing uniform random values from [0, 1).
+One copy is left unsorted; the other is sorted ascending via `std::sort`.
+A third `int` array holds the output.
+
+`array_test` iterates over the input and writes `1` or `0` to the result array depending on whether each element is below or above 0.5.
+Both arrays are processed 31 times each, and wall-clock time is measured separately for each run.
+
+**The branch at the center of it all**
+
+The only non-trivial operation in the hot loop is the comparison `array[i] < 0.5`.
+Because the input is drawn uniformly from [0, 1), exactly half the values fall below the threshold — making this comparison a fair coin flip on the unsorted array.
+Modern CPUs speculatively execute past branches using a branch predictor; a misprediction forces a full pipeline flush, wasting ~ 10–20 cycles per occurrence.
+At around 50% misprediction rate over 5M iterations × 31 repetitions, this overhead accumulates significantly.
+
+**Why sorting helps**
+
+Sorting clusters all sub-0.5 values at the front of the array and all above-0.5 values at the back.
+The branch pattern becomes: *always taken* for the first half, *never taken* for the second — with a single transition between the two.
+The predictor locks onto each pattern immediately, reducing mispredictions to near zero.
+The arithmetic work, memory footprint, and access pattern are otherwise identical between the two runs.
+
+**The takeaway**
+
+This is a clean, controlled demonstration: same data, same operations, same memory layout — only the ordering changes, and with it the predictability of the branch stream.
+The measurable speedup is **entirely attributable to branch prediction efficiency**.
+
