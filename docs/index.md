@@ -97,7 +97,7 @@ Lab material for this course is available on the following GitHub repository: [T
 - [Parallel Programming in C with MPI and OpenMP](https://www.mheducation.com/highered/product/parallel-programming-c-mpi-openmp-quinn/M9780072822564.html) – Quinn
 - [Numerical Linear Algebra](https://epubs.siam.org/doi/book/10.1137/1.9780898719574) – Trefethen & Bau
 - [Optimizing Compilers for Modern Architectures](https://www.elsevier.com/books/optimizing-compilers-for-modern-architectures/allen/978-0-08-051345-4) – Allen & Kennedy
-- [Hacker's Delight](https://www.pearson.com/en-us/subject-catalog/p/hackers-delight/P200000000671) – Warren
+- [Hacker's Delight](https://dn710003.ca.archive.org/0/items/random-papers9/Henry%20S.%20Warren%20-%20Hacker%27s%20Delight%20%282nd%20Edition%29-Addison-Wesley%20Professional%20%282012%29.pdf) – H. Warren
 
 **Standards, specifications & documentation**
 
@@ -110,14 +110,22 @@ Lab material for this course is available on the following GitHub repository: [T
 
 **Papers**
 
-- [What Every Computer Scientist Should Know About Floating-Point Arithmetic](https://www.itu.dk/~sestoft/bachelor/IEEE754_article.pdf) – Goldberg *(free PDF)*
-- [What Every Programmer Should Know About Memory](https://people.freebsd.org/~lstewart/articles/cpumemory.pdf) – Drepper *(free PDF)*
+- [What Every Computer Scientist Should Know About Floating-Point Arithmetic](https://www.itu.dk/~sestoft/bachelor/IEEE754_article.pdf) – D. Goldberg
+- [What Every Programmer Should Know About Memory](https://people.freebsd.org/~lstewart/articles/cpumemory.pdf) – U. Drepper
+- [Scalable Communication Protocols for Dynamic Sparse Data Exchange](https://spcl.ethz.ch/Publications/.pdf/hoefler-dsde-protocols.pdf) - T. Hoefler et al. ([slides](https://spcl.ethz.ch/Publications/.pdf/hoefler-dsde-protocols-slides.pdf))
+- [Scientific Benchmarking of Parallel Computing Systems](https://htor.inf.ethz.ch/publications/img/hoefler-scientific-benchmarking.pdf) - T. Hoefler et al. ([slides](https://htor.inf.ethz.ch/publications/img/hoefler-scientific-benchmarking_slides.pdf), [recorded talk](https://youtu.be/HwEpXIWAWTU))
+- [Demystifying the Characteristics of High Bandwidth Memory for Real-Time Systems](https://upcommons.upc.edu/server/api/core/bitstreams/b843de39-f32f-4069-8843-48f74c030213/content) - K. Asifuzzaman et al.
 - TBA
 
 **Websites, blogs & articles**
 
 - [HPC Wiki](https://hpc-wiki.info/hpc/HPC_Wiki)
+- [Chips & Cheese](https://chipsandcheese.com/)
 - [Daniel Lemire](https://lemire.me/blog/)
+- [Inside NVIDIA GPUs: Anatomy of high performance matmul kernels](https://www.aleksagordic.com/blog/matmul)
+- [How to Optimize a CUDA Matmul Kernel for cuBLAS-like Performance: a Worklog](https://siboehm.com/articles/22/CUDA-MMM)
+- [Outperforming cuBLAS on H100: a Worklog](https://cudaforfun.substack.com/p/outperforming-cublas-on-h100-a-worklog)
+- [Notes About Nvidia GPU Shared Memory Banks](https://feldmann.nyc/blog/smem-microbenchmarks)
 - [A (Draft) Taxonomy of SIMD Usage](https://branchfree.org/2024/06/09/a-draft-taxonomy-of-simd-usage/)
 - TBA
 
