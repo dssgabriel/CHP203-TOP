@@ -2,7 +2,7 @@
 
 Software engineering techniques to improve spatial and temporal data locality in the pursuit of performance.
 
-The code for the exercices is available at [github.com/dssgabriel/TOP-26/lab3](https://github.com/dssgabriel/TOP-26/tree/main/lab3).
+The code for the exercices is available at [github.com/dssgabriel/TOP-26/lab2](https://github.com/dssgabriel/TOP-26/tree/main/lab2).
 
 
 ## Data structure packing
@@ -10,11 +10,10 @@ The code for the exercices is available at [github.com/dssgabriel/TOP-26/lab3](h
 The goal of this exercice is to improve the layout of the data structures used in the `mesh` code.
 We start by packing to reduce its memory footprint.
 
-1. Given the alignment rules imposed on structures/classes by the ISO C and C++ standards, determine how many bytes are
-used by the `Cell` structure.
+1. Given the alignment rules imposed on structures/classes by the ISO C and C++ standards, determine how many bytes are used by the `Cell` structure.
 
 2. Rearrange the layout of the `Cell` structure and delete any unnecessary fields to minimize its memory footprint.
-Compute how much memory is saved using the optimized layout.
+   Compute how much memory is saved using the optimized layout.
 
 3. Using Perf, check if there is a change in the number of cache misses between the two structure implementations.
 
@@ -41,41 +40,42 @@ results.
 5. Measure the strong scaling of the new code.
 
 
----
+### Dense matrix product optimization
 
-The rest of this lab is your first lab assignment. Your goal is to improve the performance of a
-naive matrix product by tuning array layout and memory access patterns.
+Your goal is to improve the performance of a naive dense matrix product by tuning array layout and memory access patterns.
 
-For this exercise, we will rely on [Kokkos](https://kokkos.org/kokkos-core-wiki/index.html) and its [Views](https://kokkos.org/kokkos-core-wiki/ProgrammingGuide/View.html),
-lightweight multidimensional array containers for C++. We will also leverage Kokkos' parallel constructs to express
-portable parallelism.
+For this exercise, we will rely on [Kokkos](https://kokkos.org/kokkos-core-wiki/index.html) and its [Views](https://kokkos.org/kokkos-core-wiki/ProgrammingGuide/View.html), lightweight multidimensional array containers for C++.
+We will also leverage Kokkos' parallel constructs to express portable parallelism.
 
-If you have a GPU (NVIDIA w/ CUDA, AMD w/ HIP, or Intel Arc w/ SYCL), you can also change the Memory/Execution spaces
-of the code to trivially make it run on your accelerator (see how [here](https://kokkos.org/kokkos-core-wiki/ProgrammingGuide/ProgrammingModel.html)).
+If you have a GPU (NVIDIA w/ CUDA, AMD w/ HIP, or Intel Arc w/ SYCL), you can also change the Memory/Execution spaces of the code to trivially make it run on your accelerator (see how [here](https://kokkos.org/kokkos-core-wiki/ProgrammingGuide/ProgrammingModel.html)).
 
 
 ## Array layouts
 
-1. Measure the performance of the naive matrix product and plot the results. You can simply measure its runtime, or
-derived metrics such as computational performance (in FLOP/s).   
-Conduct a strong scaling study and plot the results too.
+1. Measure the performance of the naive matrix product and plot the results.
+   You can simply measure its runtime, or derived metrics such as computational performance (in FLOP/s).   
+   Conduct a strong scaling study and plot the results too.
 
-2. Try changing the layout of the matrices (e.g. `Kokkos::LayoutRight` to `Kokkos::LayoutLeft`). Do you see any
-performance improvement? Which combination gives the best results? Explain why.
+2. Try changing the layout of the matrices (e.g. `Kokkos::LayoutRight` to `Kokkos::LayoutLeft`).
+   Do you see any performance improvement?
+   Which combination gives the best results?
+   Explain why.
 
 3. Repeat the steps of question 1.
 
 
 ## Cache blocking
 
-1. Profile the `matrix-product` code using Perf/Hotspot. Specifically, look at cache misses in the L1 and L3 (LLC) caches.
+1. Profile the `matrix-product` code using Perf/Hotspot.
+   Specifically, look at cache misses in the L1 and L3 (LLC) caches.
 
-2. Implement a cache-blocked version of the matrix multiplication to improve the spatial and temporal data locality of
-the loop.
+2. Implement a cache-blocked version of the matrix multiplication to improve the spatial and temporal data locality of the loop.
 
-3. Assert that your implementation computes the correct result. Update the `CMakeLists.txt` file accordingly.
+3. Assert that your implementation computes the correct result.
+   Update the `CMakeLists.txt` file accordingly.
 
-4. Tune the block dimensions to maximize the performance of your cache-blocked version. Use Perf to assert the
-improvements in spatial and temporal locality.
+4. Tune the block dimensions to maximize the performance of your cache-blocked version.
+   Use Perf to assert the improvements in spatial and temporal locality.
 
-5. Make a final performance and strong scaling study of the code and plot the results. Conclude.
+5. Make a final performance and strong scaling study of the code and plot the results.
+   Conclude.
