@@ -104,11 +104,13 @@ There are debuggers specifically designed for the needs of parallel programs. Ex
 Nevertheless, it is possible to use GDB to debug small-scale parallel programs.
 For multi-threaded programs, simply use the `info threads` command in GDB. We can choose to view a particular thread with the command `thread <thread_number>`.
 
-For MPI programs, we can use the following trick:
-```sh
-mpirun -np <NPROC> <TERM_EMULATOR> -e gdb -args <MY_BIN> [ARGS...]
-```
-This will open one terminal per MPI process.
+!!! tip
+
+    For MPI programs, we can use the following trick:
+    ```sh
+    mpirun -np <NPROC> <TERM_EMULATOR> -e gdb -args <MY_BIN> [ARGS...]
+    ```
+    This will open one terminal per MPI process.
 
 1. Start from the original `mol-dyn` code and parallelize the program's most expensive function using OpenMP or Pthread.
 
