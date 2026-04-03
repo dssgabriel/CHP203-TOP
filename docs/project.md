@@ -85,15 +85,14 @@ In our case, we will consider a fluid flowing through a 2D tube in which a round
 This is essentially equivalent to simulating a wind tunnel.
 For the solver, we use the lattice Boltzmann method (LBM). 
 
-The following references can help to better understand the details of the mathematical resolution:
+References:
 
-- [General description](https://cims.nyu.edu/billbao/report930.pdf)
-- [Alexandre Dupuis' PhD thesis, chap. 3](https://cui.unige.ch/chopard/CA/aDupuisPhD.pdf)
-- Implementation examples: [[1](https://wiki.palabos.org)], [[2](https://cims.nyu.edu/billbao/courses.html)]
+- [General description](https://en.wikipedia.org/wiki/Lattice_Boltzmann_methods)
+- [Implementation examples](https://wiki.palabos.org)
 
 ### D2Q9 LBM scheme
 
-As explained in the aforementioned documents, LBM models the fluid by spatially discretizing it on a Cartesian grid.
+As explained in the aforementioned documents, LBM models the fluid by spatially discretizing it onto a Cartesian grid.
 Within the grid cells, the fluid is broken down at the microscopic level into fluid particles that can move in 9 directions.
 This is known as the D2Q9 model (2 dimensions, 9 directions/speeds), see figure 1 below.
 
