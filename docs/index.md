@@ -97,6 +97,7 @@ Lab material for this course is available on the following GitHub repository: [T
 - [Parallel Programming in C with MPI and OpenMP](https://www.mheducation.com/highered/product/parallel-programming-c-mpi-openmp-quinn/M9780072822564.html) – Quinn
 - [Numerical Linear Algebra](https://epubs.siam.org/doi/book/10.1137/1.9780898719574) – Trefethen & Bau
 - [Optimizing Compilers for Modern Architectures](https://www.elsevier.com/books/optimizing-compilers-for-modern-architectures/allen/978-0-08-051345-4) – Allen & Kennedy
+- [GPU Gems (3rd edition)](https://developer.nvidia.com/gpugems/gpugems3/part-v-physics-simulation)
 - [Hacker's Delight](https://dn710003.ca.archive.org/0/items/random-papers9/Henry%20S.%20Warren%20-%20Hacker%27s%20Delight%20%282nd%20Edition%29-Addison-Wesley%20Professional%20%282012%29.pdf) – H. Warren
 
 **Standards, specifications & documentation**
@@ -117,18 +118,30 @@ Lab material for this course is available on the following GitHub repository: [T
 - [Demystifying the Characteristics of High Bandwidth Memory for Real-Time Systems](https://upcommons.upc.edu/server/api/core/bitstreams/b843de39-f32f-4069-8843-48f74c030213/content) - K. Asifuzzaman et al.
 - TBA
 
+**Talks**
+
+- [Think Parallel](https://youtu.be/VSDmkwHWpfA)
+- [Multidimensional C++ - B. A. Lelbach](https://youtu.be/aFCLmQEkPUw)
+- [More Speed & Simplicity: Practical Data-Oriented Design in C++ - V. Romeo](https://youtu.be/zDFSDBcIqhE)
+- [The C++ Execution Model](https://youtu.be/6zq5ZmCvldU)
+- [How to Tame Packs, `std::tuple`, and the Wily `std::integer_sequence` - A. Alexandrescu](https://youtu.be/X_w_pcPs2Fk)
+- [What Every Programmer Should Know about How CPUs Work - M. Godbolt](https://youtu.be/-HNpim5x-IE)
+- [`*(char*)0 = 0;` What Does the C++ Programmer Intend With This Code? - J.F. Bastien](https://youtu.be/dFIqNZ8VbRY)
+
 **Websites, blogs & articles**
 
 - [HPC Wiki](https://hpc-wiki.info/hpc/HPC_Wiki)
 - [Chips & Cheese](https://chipsandcheese.com/)
 - [Daniel Lemire](https://lemire.me/blog/)
+- [Matt Godbolt's Advent of Compiler Optimizations (AoCO) 2025](https://xania.org/AoCO2025)
+- [Optimizing parallel reductions in CUDA](https://developer.download.nvidia.com/assets/cuda/files/reduction.pdf)
+- [Parallel Prefix Sum (Scan) with CUDA](https://developer.nvidia.com/gpugems/gpugems3/part-vi-gpu-computing/chapter-39-parallel-prefix-sum-scan-cuda)
 - [Inside NVIDIA GPUs: Anatomy of high performance matmul kernels](https://www.aleksagordic.com/blog/matmul)
 - [How to Optimize a CUDA Matmul Kernel for cuBLAS-like Performance: a Worklog](https://siboehm.com/articles/22/CUDA-MMM)
 - [Outperforming cuBLAS on H100: a Worklog](https://cudaforfun.substack.com/p/outperforming-cublas-on-h100-a-worklog)
 - [Notes About Nvidia GPU Shared Memory Banks](https://feldmann.nyc/blog/smem-microbenchmarks)
 - [A (Draft) Taxonomy of SIMD Usage](https://branchfree.org/2024/06/09/a-draft-taxonomy-of-simd-usage/)
 - TBA
-
 
 **Useful tools**
 
