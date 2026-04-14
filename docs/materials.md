@@ -1,4 +1,4 @@
-# Repository and tools
+# Materials repository & Software stack
 
 The lab material for this course is available on the following [GitHub repository](https://github.com/dssgabriel/TOP-26).
 
