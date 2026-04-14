@@ -36,8 +36,9 @@
 
 ## Talks
 
-- [Think Parallel](https://youtu.be/VSDmkwHWpfA)
+- [Think Parallel - B. A. Lelbach](https://youtu.be/VSDmkwHWpfA)
 - [Multidimensional C++ - B. A. Lelbach](https://youtu.be/aFCLmQEkPUw)
+- [Block-based Parallel Programming - B. A. Lelbach](https://youtu.be/jXkEdf2Pinc)
 - [More Speed & Simplicity: Practical Data-Oriented Design in C++ - V. Romeo](https://youtu.be/zDFSDBcIqhE)
 - [The C++ Execution Model](https://youtu.be/6zq5ZmCvldU)
 - [How to Tame Packs, `std::tuple`, and the Wily `std::integer_sequence` - A. Alexandrescu](https://youtu.be/X_w_pcPs2Fk)
