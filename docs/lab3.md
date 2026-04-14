@@ -1,10 +1,10 @@
-# Lab 4: Shared-memory parallelism
+# Lab 3: Shared-memory parallelism
 
 An overview of common problems and optimization techniques for shared-memory parallelism.
 
 ## False sharing
 
-In this exercise, you'll investigate the performance impact of false sharing in a [multi-threaded C++ code snippet](https://github.com/dssgabriel/TOP-26/lab4/false-sharing) and implement solutions to mitigate this problem.
+In this exercise, you'll investigate the performance impact of false sharing in a [multi-threaded C++ code snippet](https://github.com/dssgabriel/TOP-26/lab3/false-sharing) and implement solutions to mitigate this problem.
 
 ### Analyzing the problem
 
@@ -32,7 +32,62 @@ In this exercise, you'll investigate the performance impact of false sharing in 
    Measure and report its gains.
 
 
-## NUMA-unaware vs. NUMA-aware parallel redution
+## Parallel scan
+
+In this exercise, you'll explore different approaches to implementing parallel prefix sums (scans) and analyze their performance and scalability characteristics.
+
+While reduction operations combine all elements of a sequence into a single value, scan operations compute all the partial reductions.
+For example, given an array `[1, 2, 3, 4, 5]`, an _inclusive_ scan produces `[1, 3, 6, 10, 15]` where each element is the sum of all previous elements including itself.
+An _exclusive_ scan produces `[0, 1, 3, 6, 10]` where each element is the sum of all previous elements excluding itself.
+
+Scans are fundamental parallel primitives with applications in numerous algorithms including sorting, lexical analysis, and string comparison.
+
+Consider the sample code given in [`integer-scan`](https://github.com/dssgabriel/TOP-26/lab3/integer-scan).
+
+### Sequential implementation
+
+1. Implement the inclusive scan operation sequentially and measure its performance in cycles/element using the `getticks()` function provided in the `"cycle.h"` header.
+
+2. Unlike the reduction operation, what is the theoretical computational complexity of a scan? How does this affect parallel implementation strategies?
+
+3. Compile and run your sequential implementation with both -O0 and -O3 optimization flags. Compare the performance results.
+
+### Parallelization
+
+4. Parallelize the inclusive scan using OpenMP with just `#pragma omp parallel for`. Verify your results against the sequential version.
+
+5. Why does this approach fail to produce correct results? Explain the data dependency pattern in scan operations that makes them more challenging to parallelize than reductions.
+
+### Work-efficient approach
+
+6. Implement the work-efficient parallel scan algorithm, which consists of an up-sweep (reduction) phase and a down-sweep phase.
+
+7. Use OpenMP tasks or sections to parallelize each phase. Note that synchronization between phases is critical.
+
+8. How does the performance compare to the sequential version? What is the theoretical speedup limit for this algorithm?
+
+### Going deeper...
+
+9. In the naive parallelization attempt, one could try to fix the data race using atomic operations.
+   Update your implementation to use `#pragma omp atomic`.
+   Is this approach viable for scan operations?
+   Compare its performance with the other implementations.
+   Why are atomic operations generally less effective for scan operations than for reductions?
+
+10. Implement a hybrid approach that combines the work-efficient and blocked methods for larger arrays. What are the trade-offs in choosing block sizes? How does this affect performance across different architectures?
+
+11. Implement a blocked parallel scan where:
+  1. The array is divided into blocks;
+  2. Each block computes its local scan in parallel;
+  3. The last elements of each block are scanned;
+  4. The results are propagated back to update each block.
+
+12. What are the limitations of your implementations if you plan to deploy them on many-core architectures like GPUs?
+    How would you need to adapt your algorithms for GPU implementation using frameworks like CUDA or OpenCL?
+    Propose a GPU-friendly parallel scan algorithm that addresses these limitations.
+
+
+## NUMA-awareness in parallel redution
 
 Modern multi-socket servers are **Non-Uniform Memory Access (NUMA)** machines.
 Each CPU socket has its own local memory bank; accessing *remote* memory (another socket's bank) travels over an interconnect (e.g., AMD Infinity Fabric, Intel UPI) and incurs **2–4x higher latency** and **lower bandwidth** than local access.
@@ -93,64 +148,10 @@ The file contains **two implementations**:
 3. *(Bonus)* Use `pthread_setaffinity_np` to pin each thread to a specific core before it touches memory.
    Does explicit affinity improve consistency of results?
 
-## Expected Observations
+### Expected Observations
 
 On a typical dual-socket machine you should observe the **unaware version running
 20–60% slower** than the aware version at large array sizes (≥ 512 MB), because
 roughly half the worker threads are performing remote memory accesses for their
 entire working set.
 
-
-## Parallel scan
-
-In this exercise, you'll explore different approaches to implementing parallel prefix sums (scans) and analyze their performance and scalability characteristics.
-
-While reduction operations combine all elements of a sequence into a single value, scan operations compute all the partial reductions.
-For example, given an array `[1, 2, 3, 4, 5]`, an _inclusive_ scan produces `[1, 3, 6, 10, 15]` where each element is the sum of all previous elements including itself.
-An _exclusive_ scan produces `[0, 1, 3, 6, 10]` where each element is the sum of all previous elements excluding itself.
-
-Scans are fundamental parallel primitives with applications in numerous algorithms including sorting, lexical analysis, and string comparison.
-
-Consider the sample code given in [`integer-scan`](https://github.com/dssgabriel/TOP-26/lab3/integer-scan).
-
-### Sequential implementation
-
-1. Implement the inclusive scan operation sequentially and measure its performance in cycles/element using the `getticks()` function provided in the `"cycle.h"` header.
-
-2. Unlike the reduction operation, what is the theoretical computational complexity of a scan? How does this affect parallel implementation strategies?
-
-3. Compile and run your sequential implementation with both -O0 and -O3 optimization flags. Compare the performance results.
-
-### Parallelization
-
-4. Parallelize the inclusive scan using OpenMP with just `#pragma omp parallel for`. Verify your results against the sequential version.
-
-5. Why does this approach fail to produce correct results? Explain the data dependency pattern in scan operations that makes them more challenging to parallelize than reductions.
-
-### Work-efficient approach
-
-6. Implement the work-efficient parallel scan algorithm, which consists of an up-sweep (reduction) phase and a down-sweep phase.
-
-7. Use OpenMP tasks or sections to parallelize each phase. Note that synchronization between phases is critical.
-
-8. How does the performance compare to the sequential version? What is the theoretical speedup limit for this algorithm?
-
-### Going deeper...
-
-9. In the naive parallelization attempt, one could try to fix the data race using atomic operations.
-   Update your implementation to use `#pragma omp atomic`.
-   Is this approach viable for scan operations?
-   Compare its performance with the other implementations.
-   Why are atomic operations generally less effective for scan operations than for reductions?
-
-10. Implement a hybrid approach that combines the work-efficient and blocked methods for larger arrays. What are the trade-offs in choosing block sizes? How does this affect performance across different architectures?
-
-11. Implement a blocked parallel scan where:
-  1. The array is divided into blocks;
-  2. Each block computes its local scan in parallel;
-  3. The last elements of each block are scanned;
-  4. The results are propagated back to update each block.
-
-12. What are the limitations of your implementations if you plan to deploy them on many-core architectures like GPUs?
-    How would you need to adapt your algorithms for GPU implementation using frameworks like CUDA or OpenCL?
-    Propose a GPU-friendly parallel scan algorithm that addresses these limitations.
